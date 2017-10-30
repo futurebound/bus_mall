@@ -25,8 +25,15 @@ I want to have a random number generator that selects three random images from a
 
 I want to track how many times an images in clicked on by a user.
 
+I want to ensure that no images show up twice in a row.
+
+I also want to ensure that no image shows up twice in the same selection of 3 images.
 
 
 Focus Group User:
 
 I want to have a clean interface that allows me to focus on the images at hand without much distraction.
+
+I want the instructions to be straightforward so I can navigate through the process ideally with single actions.
+
+I want to enjoy my experience and not have it too long for my attention span.
