@@ -7,6 +7,9 @@ var imageArray = [];
 var genNum1;
 var genNum2;
 var genNum3;
+var lastGen1;
+var lastGen2;
+var lastGen3;
 
 // constructor function
 function Image(name) {
@@ -15,6 +18,10 @@ function Image(name) {
   this.generated = 0;
   this.selected = 0;
 }
+
+// Image.prototype.justShown = function() {
+//
+// }
 
 // construction of new image objects that are pushed to images array
 for (var i = 0; i < images.length; i++) {
@@ -27,9 +34,9 @@ function rNJesus() {
   var rng = Math.floor(Math.random() * imageArray.length);
   console.log('random #', rng);
   // loop to allow rNJesus to reiterate until desired conditions are met, i.e. no 3 values from numbersGenerator() being the same
-  // while (genNum1 === genNum2 || genNum2 === genNum3 || genNum1 === genNum3) {
-  //   rng = Math.floor(Math.random() * imageArray.length);
-  // }
+  while (rng === lastGen1 || rng === lastGen2 || rng === lastGen3) {
+    rng = Math.floor(Math.random() * imageArray.length);
+  }
   return rng;
 }
 
@@ -41,19 +48,41 @@ function numbersGenerator() {
   console.log('number1', genNum1);
   console.log('number2', genNum2);
   console.log('number3', genNum3);
-  while (genNum1 === genNum2) {
+  while (genNum1 === genNum2) { // checks if genNum2 is the same as the first, and rerolls if it is
     console.log('rerolling number2:', genNum2);
     genNum2 = rNJesus();
     console.log('re-rolled number2 to:', genNum2);
   }
-  while (genNum1 === genNum3 || genNum2 === genNum3) {
+  while (genNum1 === genNum3 || genNum2 === genNum3) { // checks if 3 is = to 1 or 2, and rerolls if it is
     console.log('rerolling number3:', genNum3);
     genNum3 = rNJesus();
     console.log('re-rolled to number3:', genNum3);
   }
+  lastGen1 = genNum1;
+  lastGen2 = genNum2;
+  lastGen3 = genNum3;
 }
 
+// for (var i = 0; i < 25; i++) {
+// }
+
+
 numbersGenerator();
+console.log('end of 1st round');
+numbersGenerator();
+console.log('end of 2nd round');
+numbersGenerator();
+console.log('end of 3rd round');
+numbersGenerator();
+console.log('end of 4rd round');
+numbersGenerator();
+console.log('end of 5rd round');
+numbersGenerator();
+console.log('end of 6rd round');
+numbersGenerator();
+console.log('end of 7rd round');
+numbersGenerator();
+console.log('end of 8rd round');
 
 
 
