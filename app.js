@@ -14,7 +14,7 @@ var lastGen3;
 // constructor function
 function Image(name) {
   this.name = name;
-  this.path = 'img/' + name + '.jpg';
+  this.path = './img/' + name + '.jpg';
   this.generated = 0;
   this.selected = 0;
 }
@@ -29,6 +29,7 @@ for (var i = 0; i < images.length; i++) {
 }
 console.log(imageArray);
 
+// THIS A HELPER FUNCTION bruuUUUHHHHHHV b/c it doesnt add to constructor but helps
 // random number generator to be used to select random images
 function rNJesus() {
   var rng = Math.floor(Math.random() * imageArray.length);
@@ -63,37 +64,48 @@ function numbersGenerator() {
   lastGen3 = genNum3;
 }
 
-for (var i = 0; i < 25; i++) {
-  var selectedArray = [];
-  numbersGenerator();
-  selectedArray.push = lastGen1;
-  selectedArray.push = lastGen2;
-  selectedArray.push = lastGen3;
-  lastGen1.generated++;
-  lastGen2.generated++;
-  lastGen3.generated++;
-  for (var j = 0; j < selectedArray.length; j++) {
+// variables for image placement on screen
+var left = document.getElementById('left');
+var center = document.getElementById('center');
+var right = document.getElementById('left');
 
-  }
+
+
+
+
+for (var i = 0; i < 25; i++) {
+  numbersGenerator();
+  imageArray[genNum1].generated++;
+  imageArray[genNum2].generated++;
+  imageArray[genNum3].generated++;
+  // selectedArray.push(imageArray[lastGen1]);
+  // selectedArray.push(imageArray[lastGen2]);
+  // selectedArray.push(imageArray[lastGen3]);
+  // lastGen1.generated++;
+  // lastGen2.generated++;
+  // lastGen3.generated++;
+  // for (var j = 0; j < selectedArray.length; j++) {
+  //
+  // }
 }
 
 
-numbersGenerator();
-console.log('end of 1st round');
-numbersGenerator();
-console.log('end of 2nd round');
-numbersGenerator();
-console.log('end of 3rd round');
-numbersGenerator();
-console.log('end of 4rd round');
-numbersGenerator();
-console.log('end of 5rd round');
-numbersGenerator();
-console.log('end of 6rd round');
-numbersGenerator();
-console.log('end of 7rd round');
-numbersGenerator();
-console.log('end of 8rd round');
+// numbersGenerator();
+// console.log('end of 1st round');
+// numbersGenerator();
+// console.log('end of 2nd round');
+// numbersGenerator();
+// console.log('end of 3rd round');
+// numbersGenerator();
+// console.log('end of 4rd round');
+// numbersGenerator();
+// console.log('end of 5rd round');
+// numbersGenerator();
+// console.log('end of 6rd round');
+// numbersGenerator();
+// console.log('end of 7rd round');
+// numbersGenerator();
+// console.log('end of 8rd round');
 
 // function to send images to page
 
