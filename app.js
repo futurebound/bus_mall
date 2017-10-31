@@ -63,8 +63,13 @@ function numbersGenerator() {
   lastGen3 = genNum3;
 }
 
-// for (var i = 0; i < 25; i++) {
-// }
+for (var i = 0; i < 25; i++) {
+  var selectedArray = [];
+  numbersGenerator();
+  selectedArray.push = lastGen1;
+  selectedArray.push = lastGen2;
+  selectedArray.push = lastGen3;
+}
 
 
 numbersGenerator();
@@ -84,6 +89,7 @@ console.log('end of 7rd round');
 numbersGenerator();
 console.log('end of 8rd round');
 
+// function to send images to page
 
 
 // adding event listener
