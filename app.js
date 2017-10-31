@@ -1,8 +1,7 @@
 'use strict';
 
-var generated;
-var selected;
-var images = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var generations = 0;
+var images = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var imageArray = [];
 var genNum1;
 var genNum2;
@@ -19,15 +18,13 @@ function Image(name) {
   this.selected = 0;
 }
 
-// Image.prototype.justShown = function() {
-//
-// }
 
 // construction of new image objects that are pushed to images array
 for (var i = 0; i < images.length; i++) {
   imageArray.push(new Image(images[i]));
 }
 console.log(imageArray);
+
 
 // THIS A HELPER FUNCTION bruuUUUHHHHHHV b/c it doesnt add to constructor but helps
 // random number generator to be used to select random images
@@ -40,6 +37,7 @@ function rNJesus() {
   }
   return rng;
 }
+
 
 // generate 3 numbers to map to arrays for image selection
 function numbersGenerator() {
@@ -66,47 +64,38 @@ function numbersGenerator() {
 
 // variables for image placement on screen
 var left = document.getElementById('left');
+left.addEventListener('click', selectedData);
 var center = document.getElementById('center');
-var right = document.getElementById('left');
-
-
-
-
-
-for (var i = 0; i < 25; i++) {
+center.addEventListener('click', selectedData);
+var right = document.getElementById('right');
+right.addEventListener('click', selectedData);
+//function to display 3 images on screen from generated numbers
+function displayImages() {
   numbersGenerator();
-  imageArray[genNum1].generated++;
-  imageArray[genNum2].generated++;
-  imageArray[genNum3].generated++;
-  for (var j = 0; j < selectedArray.length; j++) {
-    
-  }
+  left.setAttribute('src', imageArray[lastGen1].path);
+  center.setAttribute('src', imageArray[lastGen2].path);
+  right.setAttribute('src', imageArray[lastGen3].path);
+  imageArray[lastGen1].generated++;
+  imageArray[lastGen2].generated++;
+  imageArray[lastGen3].generated++;
+  console.log(lastGen1);
+  console.log(lastGen2);
+  console.log(lastGen3);
 }
 
-
-// numbersGenerator();
-// console.log('end of 1st round');
-// numbersGenerator();
-// console.log('end of 2nd round');
-// numbersGenerator();
-// console.log('end of 3rd round');
-// numbersGenerator();
-// console.log('end of 4rd round');
-// numbersGenerator();
-// console.log('end of 5rd round');
-// numbersGenerator();
-// console.log('end of 6rd round');
-// numbersGenerator();
-// console.log('end of 7rd round');
-// numbersGenerator();
-// console.log('end of 8rd round');
-
-// function to send images to page
+displayImages();
 
 
-// adding event listener
-// for (var i = 0; i < imageArray.length; i++) {
-//   imageArray[i].addEventListener('click', function{
 //
-//   })
-// }
+function selectedData(event) {
+  event.preventDefault();
+  console.log('I selected this image:', this.getAttribute('src'));
+  for (var i = 0; i < imageArray.length; i++) {
+    if (this.getAttribute('src') === imageArray[i].path) {
+      imageArray[i].selected++;
+    }
+  }
+  generations++;
+  console.log('generation #:', generations);
+  displayImages();
+}
