@@ -69,6 +69,12 @@ for (var i = 0; i < 25; i++) {
   selectedArray.push = lastGen1;
   selectedArray.push = lastGen2;
   selectedArray.push = lastGen3;
+  lastGen1.generated++;
+  lastGen2.generated++;
+  lastGen3.generated++;
+  for (var j = 0; j < selectedArray.length; j++) {
+
+  }
 }
 
 
