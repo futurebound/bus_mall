@@ -1,10 +1,10 @@
-Roles:
+#Roles:
 Marketing
 Dev
 Focus Group User
 
 
-Marketing:
+##Marketing:
 
 I want to have a means for testing a users response to different images.
 
@@ -17,7 +17,7 @@ I want to be able to monitor how many times a specific image is randomly selecte
 I want to be able to compare all this data in a meaningful way that shows how users respond to certain images overall, as well as in relation to other images.
 
 
-Dev:
+##Dev:
 
 I want to have a group of images available to be tested.
 
@@ -30,7 +30,7 @@ I want to ensure that no images show up twice in a row.
 I also want to ensure that no image shows up twice in the same selection of 3 images.
 
 
-Focus Group User:
+##Focus Group User:
 
 I want to have a clean interface that allows me to focus on the images at hand without much distraction.
 
