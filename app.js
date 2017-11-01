@@ -1,5 +1,7 @@
 'use strict';
 
+/*** GLOBAL VARIABLE DECLARATIONS ***/
+
 var generations = 0;
 var images = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var imageArray = [];
@@ -10,6 +12,8 @@ var lastGen1;
 var lastGen2;
 var lastGen3;
 
+/*** CONSTRUCTOR FUNCTION ***/
+
 // constructor function
 function Image(name) {
   this.name = name;
@@ -18,6 +22,7 @@ function Image(name) {
   this.selected = 0;
 }
 
+/*** OBJECT INSTANTIATON ***/
 
 // construction of new image objects that are pushed to images array
 for (var i = 0; i < images.length; i++) {
@@ -26,7 +31,8 @@ for (var i = 0; i < images.length; i++) {
 console.log(imageArray);
 
 
-// THIS A HELPER FUNCTION bruuUUUHHHHHHV b/c it doesnt add to constructor but helps
+/*** HELPER FUNCTIONS ***/
+
 // random number generator to be used to select random images
 function rNJesus() {
   var rng = Math.floor(Math.random() * imageArray.length);
@@ -37,7 +43,6 @@ function rNJesus() {
   }
   return rng;
 }
-
 
 // generate 3 numbers to map to arrays for image selection
 function numbersGenerator() {
@@ -124,26 +129,35 @@ function displayImages() {
   }
 }
 
+/*** FUNCTION INVOCATION ***/
+
 displayImages();
 
+/*** CHART ***/
 
-// chart
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'pie',
+var makeChart = function() {
+  var ctx = document.getElementById('chart').getContext('2d');
+  ctx
+  var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'pie',
 
-    // The data for our dataset
-    data: {
-        labels: [],
-        datasets: [{
-            label: "Statistics",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    },
+      // The data for our dataset
+      data: {
+          labels: objectNames,
+          datasets: [{
+              label: "Statistics",
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: [0, 10, 5, 2, 20, 30, 45],
+          }]
+      },
 
-    // Configuration options go here
-    options: {}
-});
+      // Configuration options go here
+      options: {}
+  });
+};
+
+objectNames = [];
+objectGenerations = []
+objectSelections = []
