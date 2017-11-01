@@ -71,7 +71,6 @@ function selectedData(event) {
       imageArray[i].selected++;
     }
   }
-  // adds total amount of
   generations++;
   console.log('generation #:', generations);
   displayImages();
