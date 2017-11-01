@@ -84,10 +84,10 @@ function selectedData(event) {
 // adds event listeners for photos
 function addEventListeners() {
   var left = document.getElementById('left');
-  left.addEventListener('click', selectedData);
   var center = document.getElementById('center');
-  center.addEventListener('click', selectedData);
   var right = document.getElementById('right');
+  left.addEventListener('click', selectedData);
+  center.addEventListener('click', selectedData);
   right.addEventListener('click', selectedData);
 }
 
@@ -102,15 +102,15 @@ function removeEventListeners() {
 }
 
 // displays a list of the statistics for image selection
-function displayStatistics() {
-  var statistics = document.getElementById('statistics');
-  var imageStatistics;
-  for (var i = 0; i < imageArray.length; i++) {
-    imageStatistics = document.createElement('li');
-    imageStatistics.innerHTML = imageArray[i].selected + ' votes for ' + imageArray[i].name;
-    statistics.appendChild(imageStatistics);
-  }
-}
+// function displayStatistics() {
+//   var statistics = document.getElementById('statistics');
+//   var imageStatistics;
+//   for (var i = 0; i < imageArray.length; i++) {
+//     imageStatistics = document.createElement('li');
+//     imageStatistics.innerHTML = imageArray[i].selected + ' votes for ' + imageArray[i].name;
+//     statistics.appendChild(imageStatistics);
+//   }
+// }
 
 //display 3 images on screen from generated numbers
 function displayImages() {
@@ -125,39 +125,77 @@ function displayImages() {
     imageArray[lastGen3].generated++;
   } else {
     removeEventListeners();
-    displayStatistics();
+    // displayStatistics();
+    makeChart();
   }
 }
+
+//function to fill up info for chart
 
 /*** FUNCTION INVOCATION ***/
 
 displayImages();
 
+
 /*** CHART ***/
+
+var objectNames = [];
+var objectGenerations = [];
+var objectSelections = [];
+
+console.log('before:', objectNames);
+function createObjectNames() {
+  for (var i = 0; i < imageArray.length; i++) {
+    objectNames.push(imageArray[i].name);
+  }
+  console.log(objectNames);
+}
+
+console.log('before:', objectGenerations);
+function createObjectGenerations() {
+  for (var i = 0; i < imageArray.length; i++) {
+    objectGenerations.push(imageArray[i].generated);
+    console.log(objectGenerations);
+  }
+  console.log('object generations:', objectGenerations);
+}
+
+console.log('before:');
+function createObjectSelections() {
+  for (var i = 0; i < imageArray.length; i++) {
+    objectSelections.push(imageArray[i].selected);
+  }
+  console.log('object selections:', objectSelections);
+}
+
+createObjectNames();
+createObjectGenerations();
+createObjectSelections();
+
 
 var makeChart = function() {
   var ctx = document.getElementById('chart').getContext('2d');
-  ctx
   var chart = new Chart(ctx, {
-      // The type of chart we want to create
-      type: 'pie',
+    type: 'bar',
+    data: {
+      labels: objectNames,
+      datasets: [{
+        label: 'Image Generations',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: objectGenerations,
+      }],
+    },
 
-      // The data for our dataset
-      data: {
-          labels: objectNames,
-          datasets: [{
-              label: "Statistics",
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
-              data: [0, 10, 5, 2, 20, 30, 45],
-          }]
-      },
-
-      // Configuration options go here
-      options: {}
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
   });
 };
-
-objectNames = [];
-objectGenerations = []
-objectSelections = []
