@@ -62,9 +62,53 @@ function numbersGenerator() {
   lastGen3 = genNum3;
 }
 
-// variables for image placement on screen
+// checks the image clicked on to see if its source path is the same as any image in the imageArray
+function selectedData(event) {
+  event.preventDefault();
+  console.log('I selected this image:', this.getAttribute('src'));
+  for (var i = 0; i < imageArray.length; i++) {
+    if (this.getAttribute('src') === imageArray[i].path) {
+      imageArray[i].selected++;
+    }
+  }
+  // adds total amount of
+  generations++;
+  console.log('generation #:', generations);
+  displayImages();
+}
 
-//function to display 3 images on screen from generated numbers
+// adds event listeners for photos
+function addEventListeners() {
+  var left = document.getElementById('left');
+  left.addEventListener('click', selectedData);
+  var center = document.getElementById('center');
+  center.addEventListener('click', selectedData);
+  var right = document.getElementById('right');
+  right.addEventListener('click', selectedData);
+}
+
+// removes event listeners and hides photos
+function removeEventListeners() {
+  left.removeEventListener('click', selectedData);
+  center.removeEventListener('click', selectedData);
+  right.removeEventListener('click', selectedData);
+  left.style.visibility = 'hidden';
+  center.style.visibility = 'hidden';
+  right.style.visibility = 'hidden';
+}
+
+// displays a list of the statistics for image selection
+function displayStatistics() {
+  var statistics = document.getElementById('statistics');
+  var imageStatistics;
+  for (var i = 0; i < imageArray.length; i++) {
+    imageStatistics = document.createElement('li');
+    imageStatistics.innerHTML = imageArray[i].selected + ' votes for ' + imageArray[i].name;
+    statistics.appendChild(imageStatistics);
+  }
+}
+
+//display 3 images on screen from generated numbers
 function displayImages() {
   addEventListeners();
   if (generations < 25) {
@@ -82,47 +126,3 @@ function displayImages() {
 }
 
 displayImages();
-
-
-// checks the image clicked on to see if its source path is the same as any image in the imageArray
-function selectedData(event) {
-  event.preventDefault();
-  console.log('I selected this image:', this.getAttribute('src'));
-  for (var i = 0; i < imageArray.length; i++) {
-    if (this.getAttribute('src') === imageArray[i].path) {
-      imageArray[i].selected++;
-    }
-  }
-  // adds total amount of
-  generations++;
-  console.log('generation #:', generations);
-  displayImages();
-}
-
-function displayStatistics() {
-  var statistics = document.getElementById('statistics');
-  var imageStatistics;
-  for (var i = 0; i < imageArray.length; i++) {
-    imageStatistics = document.createElement('li');
-    imageStatistics.innerHTML = imageArray[i].selected + ' votes for ' + imageArray[i].name;
-    statistics.appendChild(imageStatistics);
-  }
-}
-
-function addEventListeners() {
-  var left = document.getElementById('left');
-  left.addEventListener('click', selectedData);
-  var center = document.getElementById('center');
-  center.addEventListener('click', selectedData);
-  var right = document.getElementById('right');
-  right.addEventListener('click', selectedData);
-}
-
-function removeEventListeners() {
-  left.removeEventListener('click', selectedData);
-  center.removeEventListener('click', selectedData);
-  right.removeEventListener('click', selectedData);
-  left.style.visibility = 'hidden';
-  center.style.visibility = 'hidden';
-  right.style.visibility = 'hidden';
-}
