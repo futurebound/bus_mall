@@ -36,7 +36,7 @@ console.log(imageArray);
 // random number generator to be used to select random images
 function rNJesus() {
   var rng = Math.floor(Math.random() * imageArray.length);
-  console.log('random #', rng);
+  // console.log('random #', rng);
   // loop to allow rNJesus to reiterate until desired conditions are met, i.e. no 3 values from numbersGenerator() being the same
   while (rng === lastGen1 || rng === lastGen2 || rng === lastGen3) {
     rng = Math.floor(Math.random() * imageArray.length);
@@ -49,18 +49,18 @@ function numbersGenerator() {
   genNum1 = rNJesus();
   genNum2 = rNJesus();
   genNum3 = rNJesus();
-  console.log('number1', genNum1);
-  console.log('number2', genNum2);
-  console.log('number3', genNum3);
+  // console.log('number1', genNum1);
+  // console.log('number2', genNum2);
+  // console.log('number3', genNum3);
   while (genNum1 === genNum2) { // checks if genNum2 is the same as the first, and rerolls if it is
-    console.log('rerolling number2:', genNum2);
+    // console.log('rerolling number2:', genNum2);
     genNum2 = rNJesus();
-    console.log('re-rolled number2 to:', genNum2);
+    // console.log('re-rolled number2 to:', genNum2);
   }
   while (genNum1 === genNum3 || genNum2 === genNum3) { // checks if 3 is = to 1 or 2, and rerolls if it is
-    console.log('rerolling number3:', genNum3);
+    // console.log('rerolling number3:', genNum3);
     genNum3 = rNJesus();
-    console.log('re-rolled to number3:', genNum3);
+    // console.log('re-rolled to number3:', genNum3);
   }
   lastGen1 = genNum1;
   lastGen2 = genNum2;
@@ -70,14 +70,14 @@ function numbersGenerator() {
 // checks the image clicked on to see if its source path is the same as any image in the imageArray
 function selectedData(event) {
   event.preventDefault();
-  console.log('I selected this image:', this.getAttribute('src'));
+  // console.log('I selected this image:', this.getAttribute('src'));
   for (var i = 0; i < imageArray.length; i++) {
     if (this.getAttribute('src') === imageArray[i].path) {
       imageArray[i].selected++;
     }
   }
   generations++;
-  console.log('generation #:', generations);
+  // console.log('generation #:', generations);
   displayImages();
 }
 
@@ -126,6 +126,9 @@ function displayImages() {
   } else {
     removeEventListeners();
     // displayStatistics();
+    createObjectNames();
+    createObjectGenerations();
+    createObjectSelections();
     makeChart();
   }
 }
@@ -143,34 +146,24 @@ var objectNames = [];
 var objectGenerations = [];
 var objectSelections = [];
 
-console.log('before:', objectNames);
+
 function createObjectNames() {
   for (var i = 0; i < imageArray.length; i++) {
     objectNames.push(imageArray[i].name);
   }
-  console.log(objectNames);
 }
 
-console.log('before:', objectGenerations);
 function createObjectGenerations() {
   for (var i = 0; i < imageArray.length; i++) {
     objectGenerations.push(imageArray[i].generated);
-    console.log(objectGenerations);
   }
-  console.log('object generations:', objectGenerations);
 }
 
-console.log('before:');
 function createObjectSelections() {
   for (var i = 0; i < imageArray.length; i++) {
     objectSelections.push(imageArray[i].selected);
   }
-  console.log('object selections:', objectSelections);
 }
-
-createObjectNames();
-createObjectGenerations();
-createObjectSelections();
 
 
 var makeChart = function() {
@@ -180,10 +173,10 @@ var makeChart = function() {
     data: {
       labels: objectNames,
       datasets: [{
-        label: 'Image Generations',
+        label: 'Image Selections',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: objectGenerations,
+        data: objectSelections,
       }],
     },
 
