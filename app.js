@@ -81,11 +81,13 @@ function selectedData(event) {
   displayImages();
 }
 
+// variables for event listeners
+var left = document.getElementById('left');
+var center = document.getElementById('center');
+var right = document.getElementById('right');
+
 // adds event listeners for photos
 function addEventListeners() {
-  var left = document.getElementById('left');
-  var center = document.getElementById('center');
-  var right = document.getElementById('right');
   left.addEventListener('click', selectedData);
   center.addEventListener('click', selectedData);
   right.addEventListener('click', selectedData);
@@ -138,6 +140,30 @@ function displayImages() {
 /*** FUNCTION INVOCATION ***/
 
 displayImages();
+
+
+/*** LOCAL STORAGE ***/
+
+if (localStorage.list) {
+  var list = localStore.list.split(',');
+} else {
+  var list = [];
+}
+
+
+
+function save() {
+  list.push(input.value);
+  localStore.list = list;
+  console.log('list array:', list);
+  console.log('local storage version:', localStorage.list);
+}
+
+function create() {
+  var val = input.value;
+  var item = document.createElement('li');
+}
+
 
 
 /*** CHART ***/
