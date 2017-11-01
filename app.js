@@ -63,30 +63,28 @@ function numbersGenerator() {
 }
 
 // variables for image placement on screen
-var left = document.getElementById('left');
-left.addEventListener('click', selectedData);
-var center = document.getElementById('center');
-center.addEventListener('click', selectedData);
-var right = document.getElementById('right');
-right.addEventListener('click', selectedData);
+
 //function to display 3 images on screen from generated numbers
 function displayImages() {
-  numbersGenerator();
-  left.setAttribute('src', imageArray[lastGen1].path);
-  center.setAttribute('src', imageArray[lastGen2].path);
-  right.setAttribute('src', imageArray[lastGen3].path);
-  imageArray[lastGen1].generated++;
-  imageArray[lastGen2].generated++;
-  imageArray[lastGen3].generated++;
-  console.log(lastGen1);
-  console.log(lastGen2);
-  console.log(lastGen3);
+  addEventListeners();
+  if (generations < 25) {
+    numbersGenerator();
+    left.setAttribute('src', imageArray[lastGen1].path);
+    center.setAttribute('src', imageArray[lastGen2].path);
+    right.setAttribute('src', imageArray[lastGen3].path);
+    imageArray[lastGen1].generated++;
+    imageArray[lastGen2].generated++;
+    imageArray[lastGen3].generated++;
+  } else {
+    removeEventListeners();
+    displayStatistics();
+  }
 }
 
 displayImages();
 
 
-//
+// checks the image clicked on to see if its source path is the same as any image in the imageArray
 function selectedData(event) {
   event.preventDefault();
   console.log('I selected this image:', this.getAttribute('src'));
@@ -95,7 +93,36 @@ function selectedData(event) {
       imageArray[i].selected++;
     }
   }
+  // adds total amount of
   generations++;
   console.log('generation #:', generations);
   displayImages();
+}
+
+function displayStatistics() {
+  var statistics = document.getElementById('statistics');
+  var imageStatistics;
+  for (var i = 0; i < imageArray.length; i++) {
+    imageStatistics = document.createElement('li');
+    imageStatistics.innerHTML = imageArray[i].selected + ' votes for ' + imageArray[i].name;
+    statistics.appendChild(imageStatistics);
+  }
+}
+
+function addEventListeners() {
+  var left = document.getElementById('left');
+  left.addEventListener('click', selectedData);
+  var center = document.getElementById('center');
+  center.addEventListener('click', selectedData);
+  var right = document.getElementById('right');
+  right.addEventListener('click', selectedData);
+}
+
+function removeEventListeners() {
+  left.removeEventListener('click', selectedData);
+  center.removeEventListener('click', selectedData);
+  right.removeEventListener('click', selectedData);
+  left.style.visibility = 'hidden';
+  center.style.visibility = 'hidden';
+  right.style.visibility = 'hidden';
 }
