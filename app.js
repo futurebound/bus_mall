@@ -127,6 +127,7 @@ function displayImages() {
     imageArray[lastGen3].generated++;
   } else {
     removeEventListeners();
+    imageArray = JSON.parse(localStorage.saveImageArray);
     // displayStatistics();
     createObjectNames();
     createObjectGenerations();
@@ -144,26 +145,22 @@ displayImages();
 
 /*** LOCAL STORAGE ***/
 
-if (localStorage.list) {
-  var list = localStore.list.split(',');
-} else {
-  var list = [];
-}
-
-
-
+var saveImageArray = [];
 function save() {
-  list.push(input.value);
-  localStore.list = list;
-  console.log('list array:', list);
-  console.log('local storage version:', localStorage.list);
+  if (saveImageArray) {
+    saveImageArray.push(JSON.stringify(imageArray));
+    localStorage.saveImageArray = saveImageArray;
+  }
 }
 
-function create() {
-  var val = input.value;
-  var item = document.createElement('li');
+function load() {
+  if (localStorage.saveImageArray) {
+    saveImageArray = localStorage.saveImageArray.split(',');
+    saveImageArray = JSON.parse(saveImageArray);
+  }
 }
 
+load();
 
 
 /*** CHART ***/
