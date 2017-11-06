@@ -81,11 +81,13 @@ function selectedData(event) {
   displayImages();
 }
 
+// variables for event listeners
+var left = document.getElementById('left');
+var center = document.getElementById('center');
+var right = document.getElementById('right');
+
 // adds event listeners for photos
 function addEventListeners() {
-  var left = document.getElementById('left');
-  var center = document.getElementById('center');
-  var right = document.getElementById('right');
   left.addEventListener('click', selectedData);
   center.addEventListener('click', selectedData);
   right.addEventListener('click', selectedData);
@@ -125,6 +127,7 @@ function displayImages() {
     imageArray[lastGen3].generated++;
   } else {
     removeEventListeners();
+    imageArray = JSON.parse(localStorage.saveImageArray);
     // displayStatistics();
     createObjectNames();
     createObjectGenerations();
@@ -138,6 +141,26 @@ function displayImages() {
 /*** FUNCTION INVOCATION ***/
 
 displayImages();
+
+
+/*** LOCAL STORAGE ***/
+
+var saveImageArray = [];
+function save() {
+  if (saveImageArray) {
+    saveImageArray.push(JSON.stringify(imageArray));
+    localStorage.saveImageArray = saveImageArray;
+  }
+}
+
+function load() {
+  if (localStorage.saveImageArray) {
+    saveImageArray = localStorage.saveImageArray.split(',');
+    saveImageArray = JSON.parse(saveImageArray);
+  }
+}
+
+load();
 
 
 /*** CHART ***/
